@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/formulaOne.ChatService.props" />
+</Project>
