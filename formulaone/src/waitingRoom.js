@@ -7,6 +7,7 @@ const WaitingRoom = ({joinChatRoom})=>
         const [userName,setUserName] = useState();
         const [chatRoom,setChatRoom] = useState();
 
+
         return(
             <Form onSubmit={e=>{
                 e.preventDefault()
@@ -17,7 +18,7 @@ const WaitingRoom = ({joinChatRoom})=>
                     <Form.Group>
                         <Form.Control placeholder = "username" onChange = {e=>setUserName(e.target.value)}/>
 
-                        <Form.Control placeholder="username" onChange={e => setUserName(e.target.value)} />
+                        <Form.Control placeholder="chatroom" onChange={e => setUserName(e.target.value)} />
                     </Form.Group>
                     </Col>
                     <Col>
