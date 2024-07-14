@@ -1,14 +1,25 @@
 using formulaOne.ChatService;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("reactApp", builder =>
+    {
+        builder
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -21,9 +32,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseCors("reactApp");
+
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapHub<ChatRoom>(pattern:"./Chat");
+app.MapHub<ChatRoom>("/Chat");
 
 app.Run();
