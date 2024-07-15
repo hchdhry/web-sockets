@@ -18,7 +18,7 @@ const WaitingRoom = ({joinChatRoom})=>
                     <Form.Group>
                         <Form.Control placeholder = "username" onChange = {e=>setUserName(e.target.value)}/>
 
-                        <Form.Control placeholder="chatroom" onChange={e => setUserName(e.target.value)} />
+                        <Form.Control placeholder="chatroom" onChange={e => setChatRoom(e.target.value)} />
                     </Form.Group>
                     </Col>
                     <Col>

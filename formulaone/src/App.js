@@ -7,22 +7,28 @@ import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr"
 
 function App() {
   const [conn,setConnection] = useState();
-  const joinChatRoom = async(userName,chatRoom)=>
-    {
-      try{
-        const conn = new HubConnectionBuilder()
-          .withUrl("http://localhost:5130/Chat")
+  const joinChatRoom = async (userName, chatRoom) => {
+    try {
+      const conn = new HubConnectionBuilder()
+        .withUrl("http://localhost:5130/Chat")
         .configureLogging(LogLevel.Information)
-        .build()
+        .build();
 
-        conn.on("joinSpecificGroup", (userName,mgs)=>{
-          console.log("msg"+mgs)
-        })
-        await conn.start()
-        await conn.invoke("joinSpecificGroup", { userName,chatRoom})
-      }
-      catch{}
+      conn.on("ReceivedMessage", (user, message) => {
+        console.log(`${user}: ${message}`);
+      });
+
+      await conn.start();
+      console.log("Connection started");
+
+      await conn.invoke("joinSpecificGroup", { Username: userName, ChatRooom: chatRoom });
+      console.log("Joined specific group");
+
+      setConnection(conn);
+    } catch (error) {
+      console.error("Error joining chat room:", error);
     }
+  };
   return (
     <div >
       <main>
