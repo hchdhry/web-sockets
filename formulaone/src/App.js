@@ -7,6 +7,7 @@ import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr"
 
 function App() {
   const [conn,setConnection] = useState();
+  const [messages,setMessages] = useState([]);
   const joinChatRoom = async (userName, chatRoom) => {
     try {
       const conn = new HubConnectionBuilder()
@@ -17,6 +18,10 @@ function App() {
       conn.on("ReceivedMessage", (user, message) => {
         console.log(`${user}: ${message}`);
       });
+      conn.on("sendSpecificMessage",(userName,message)=>{
+        setMessages(prevMsg=>[...prevMsg,{messages:message}]
+        )
+      })
 
       await conn.start();
       console.log("Connection started");
