@@ -1,7 +1,7 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Container, Row ,Col} from 'react-bootstrap';
-import WaitingRoom from './waitingRoom';
+import WaitingRoom from './Components/waitingRoom';
 import { useState } from 'react';
 import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr"
 
