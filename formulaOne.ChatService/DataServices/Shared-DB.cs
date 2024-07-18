@@ -4,7 +4,12 @@ namespace formulaOne.ChatService;
 
 public class Shared_DB
 {
-    private readonly ConcurrentDictionary<string,UserConnection> _connections;
+    private readonly ConcurrentDictionary<string, UserConnection> _connections;
 
-    public ConcurrentDictionary<string, UserConnection> connections => _connections;
+    public Shared_DB()
+    {
+        _connections = new ConcurrentDictionary<string, UserConnection>();
+    }
+
+    public ConcurrentDictionary<string, UserConnection> Connections => _connections;
 }

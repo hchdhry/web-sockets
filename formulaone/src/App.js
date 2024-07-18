@@ -2,6 +2,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Container, Row ,Col} from 'react-bootstrap';
 import WaitingRoom from './Components/waitingRoom';
+import ChatRoom from "./Components/Chatroom"
 import { useState } from 'react';
 import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr"
 
@@ -26,7 +27,7 @@ function App() {
       await conn.start();
       console.log("Connection started");
 
-      await conn.invoke("joinSpecificGroup", { Username: userName, ChatRooom: chatRoom });
+      await conn.invoke("joinSpecificGroup", { Username: userName, ChatRoom: chatRoom });
       console.log("Joined specific group");
 
       setConnection(conn);
@@ -43,7 +44,9 @@ function App() {
             <h1>welcome</h1>
             </Col>
           </Row>
-          <WaitingRoom joinChatRoom={joinChatRoom}></WaitingRoom>
+          {!conn?
+          <WaitingRoom joinChatRoom={joinChatRoom}/>:
+            <ChatRoom messages = {messages}/>}
         </Container>
       </main>
     </div>
