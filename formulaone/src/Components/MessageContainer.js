@@ -1,19 +1,18 @@
-const MessageContainer = ({messages})=>
-{
-    return(
-    messages.map((message,index)=>{
-        
-        <table striped bordered>
-            <tr>
-                <td>
-                    {message.msg}
-                </td>
-            </tr>
-        </table>
-        
-    })
-)
-}
+import React from 'react';
+import { Table } from 'react-bootstrap';
 
+const MessageContainer = ({ messages }) => {
+    return (
+        <Table striped bordered>
+            <tbody>
+                {messages.map((message, index) => (
+                    <tr key={index}>
+                        <td>{message.user}: {message.message}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    );
+};
 
-export default MessageContainer
+export default MessageContainer;
